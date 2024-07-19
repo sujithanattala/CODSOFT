@@ -1,0 +1,62 @@
+# To-Do List application
+
+tasks = []
+
+def display_menu():
+    print("\nTo-Do List Application")
+    print("1. Add a new task")
+    print("2. View all tasks")
+    print("3. Mark a task as completed")
+    print("4. Delete a task")
+    print("5. Exit")
+
+def add_task():
+    task = input("Enter the task: ")
+    tasks.append({"task": task, "completed": False})
+    print(f"Task '{task}' added.")
+
+def view_tasks():
+    if not tasks:
+        print("No tasks found.")
+        return
+    print("\nTo-Do List:")
+    for i, task in enumerate(tasks, 1):
+        status = "Completed" if task["completed"] else "Pending"
+        print(f"{i}. {task['task']} - {status}")
+
+def mark_task_completed():
+    task_number = int(input("Enter the task number to mark as completed: "))
+    if 1 <= task_number <= len(tasks):
+        tasks[task_number - 1]["completed"] = True
+        print(f"Task {task_number} marked as completed.")
+    else:
+        print("Invalid task number.")
+
+def delete_task():
+    task_number = int(input("Enter the task number to delete: "))
+    if 1 <= task_number <= len(tasks):
+        removed_task = tasks.pop(task_number - 1)
+        print(f"Task '{removed_task['task']}' deleted.")
+    else:
+        print("Invalid task number.")
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Choose an option (1-5): ")
+        if choice == '1':
+            add_task()
+        elif choice == '2':
+            view_tasks()
+        elif choice == '3':
+            mark_task_completed()
+        elif choice == '4':
+            delete_task()
+        elif choice == '5':
+            print("Exiting the application.")
+            break
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
+if __name__ == "__main__":
+    main()
